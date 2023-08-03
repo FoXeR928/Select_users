@@ -1,0 +1,3 @@
+select col.id, col.name, sub.name as sub_name, col.subdivision_id as sub_id, LEN(REPLACE(replace(sub.name,'Подразделение ',''),'.','')) as sub_level, result.colls_count from collaborators as col
+JOIN subdivisions as sub ON (sub.id=col.subdivision_id and col.age<40 and LEN(col.name)>11 and col.subdivision_id<>100055 and col.subdivision_id<>100059)
+JOIN (select subdivision_id, count(subdivision_id) as colls_count  from collaborators group by subdivision_id) as result on (col.subdivision_id=result.subdivision_id)
